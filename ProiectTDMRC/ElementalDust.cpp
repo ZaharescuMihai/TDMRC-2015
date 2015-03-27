@@ -128,7 +128,7 @@ void ElementalDust::import(void *file_contents, size_t size)
 {
 	clear();
 
-	nr_particles_int = size/2;
+	nr_particles_int = size/4;
 	partiles_prt = new particle[nr_particles_int];
 
 	unsigned char *contents_uchar = (unsigned char*)file_contents;
