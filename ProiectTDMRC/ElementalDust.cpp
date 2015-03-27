@@ -218,6 +218,8 @@ bool ElementalDust::operator==(ElementalDust &b_flt)
 	for( int i=0; i<nr_particles_int; i++)
 		if((partiles_prt[i].x != b_flt.partiles_prt[i].x) || (partiles_prt[i].y != b_flt.partiles_prt[i].y))
 			return false;
+
+	return true;
 }
 
 bool ElementalDust::operator!=(ElementalDust &b_flt)
