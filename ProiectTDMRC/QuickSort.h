@@ -135,9 +135,7 @@ public:
 		std::vector<T> myvector (data, data + nr_elements); 
 		C comp;
 		std::sort (myvector.begin(), myvector.end(), comp);
-
-		for(int i=0;i<nr_elements;i++)
-			data[i] = myvector[i];
+		memcpy( data, &vector[ 0 ], sizeof( T ) * nr_elements );
 	}
 };
 
