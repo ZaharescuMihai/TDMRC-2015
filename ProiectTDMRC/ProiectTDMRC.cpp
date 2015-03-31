@@ -7,7 +7,7 @@
 
 #include "StudentCodec.h"
 
-//#include "QuickSort.h"
+#include "QuickSort.h"
 
 
 size_t getFileContents(char *file_name, void **file_contents)
@@ -40,7 +40,7 @@ void writeFileContents(char *file_name, void *file_contents, size_t file_size_ui
 	fclose (fout);
 }
 
-const char* Compare(void *original_data_p, size_t original_size, void *decompressed_p, size_t decompressed_size)
+/*const char* Compare(void *original_data_p, size_t original_size, void *decompressed_p, size_t decompressed_size)
 {
 	ElementalDust original, decompressed;
 
@@ -51,6 +51,26 @@ const char* Compare(void *original_data_p, size_t original_size, void *decompres
 
 	if(original != decompressed)
 		return "The buffer contents differ.\n";
+	
+	return "The buffers are identical.\n";
+}*/
+
+const char* Compare(void *original_data_p, size_t original_size, void *decompressed_p, size_t decompressed_size)
+{
+	unsigned int *original_intp = (unsigned int*)original_data_p;
+	unsigned int *decompressed_intp = (unsigned int*)decompressed_p;
+
+	if(original_size != decompressed_size)
+		return "The buffer sizes differ.\n";
+
+	int nr_ints = original_size/sizeof(unsigned int);
+
+	QuickSort<unsigned int>::quicksort(original_intp, nr_ints);
+	QuickSort<unsigned int>::quicksort(decompressed_intp, nr_ints);
+
+	for(int i=0; i<nr_ints; i++)
+		if(original_intp[i] != decompressed_intp[i])
+			return "The buffer contents differ.\n";
 	
 	return "The buffers are identical.\n";
 }
