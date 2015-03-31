@@ -21,26 +21,25 @@ void ElementalDust::clear()
 	nr_particles_int = 0;
 }
 
-struct compareX
+struct compare
 {
 	bool operator() (particle &a, particle &b)
 	{
+		if ( a.x != b.x )
+		{
+			return a.x < b.x;
+		}
+		else
+		{
+			return a.y < b.y;
+		}
 		return a.x < b.x;
-	}
-};
-
-struct compareY
-{
-	bool operator() (particle &a, particle &b)
-	{
-		return a.y < b.y;
 	}
 };
 
 void ElementalDust::sortParticles()
 {
-	QuickSort<particle, compareX>::quicksort(partiles_prt, nr_particles_int);
-	QuickSort<particle, compareY>::quicksort(partiles_prt, nr_particles_int);
+	QuickSort<particle, compare>::quicksort(partiles_prt, nr_particles_int);
 }
 
 void ElementalDust::import(KImage *import, float multiplicator)
@@ -136,8 +135,8 @@ void ElementalDust::import(void *file_contents, size_t size)
 	//TO DO: optimize: use buffer
 	for(int i=0; i<this->nr_particles_int; i++)
 	{
-		partiles_prt[i].x = fixed_float(contents_uchar[i*2 + 0], contents_uchar[i*2 + 1]);
-		partiles_prt[i].y = fixed_float(contents_uchar[i*2 + 2], contents_uchar[i*2 + 3]);
+		partiles_prt[i].x = fixed_float(contents_uchar[i*4 + 0], contents_uchar[i*4 + 1]);
+		partiles_prt[i].y = fixed_float(contents_uchar[i*4 + 2], contents_uchar[i*4 + 3]);
 	}
 }
 
