@@ -1,3 +1,6 @@
+#ifndef STUDENTCODECH
+#define STUDENTCODECH
+
 class StudentCodec
 {
 public:
@@ -5,3 +8,5 @@ public:
 
 	static size_t decompress(void *in, size_t in_size, void **out);
 };
+
+#endif

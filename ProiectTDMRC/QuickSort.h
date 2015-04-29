@@ -23,7 +23,6 @@ private:
 
 	// lo is the index of the leftmost element of the subarray
 	// hi is the index of the rightmost element of the subarray (inclusive)
-
 	static int  partition(T *A, int lo, int hi)
 	{
 		int pivotIndex = choosePivot(A, lo, hi);
@@ -48,13 +47,6 @@ private:
 		swap(A[storeIndex], A[hi]);  // Move pivot to its final place
 		return storeIndex;
 	}
-
-
-
-
-
-
-
 
 	static void quicksort(T *A, int lo, int hi)
 	{
